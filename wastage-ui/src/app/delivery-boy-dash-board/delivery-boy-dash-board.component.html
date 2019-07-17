@@ -1,0 +1,160 @@
+<!-- 
+<div class="w3-bar" style="margin-bottom: 80px;"></div>
+<div class="row">
+    <div class="col-md-10" style="font-size: 40px; font-family:monospace; text-align: center;">Dashboard</div>
+	<div class="col-md-2">
+		<button style="margin-right: 60px;" data-toggle="modal" href="#statusModal" (click)="fetchStatus()" class="btn btn-primary btn-md">Status</button>
+		<button class="btn btn-primary" routerLink="/CharityProfile">Profile</button>
+		<img routerLink="/ProfileEditable" src="../../assets/img/profile.png" height="80px" />
+  </div>
+</div> -->
+
+<div class="w3-bar" style="margin-bottom: 80px;"></div>
+<div class="w3-container w3-padding-16">
+  <h5 class="w3-black w3-padding">Profile Details:</h5>
+  <div class="w3-border" style="margin-top: -10px">
+    <div class="row">
+      <div class="col-md-4 w3-center w3-padding ">
+        <img src="../../assets/img/profile.png" width="50%" />
+      </div>
+
+    
+      <div class="col-md-8">
+        <table class="table table-striped">
+          <tr>
+            <th>Name</th>
+            <td>{{deliveryBoy.deliveryBoyName}}</td>
+          </tr>
+          <tr>
+            <th>Email</th>
+            <td>{{deliveryBoy.email}}</td>
+          </tr>
+          <tr>
+            <th>Mobile</th>
+            <td>{{deliveryBoy.mobile}}</td>
+          </tr>
+          <tr>
+            <th>Vechile Type</th>
+            <td>Bike</td>
+          </tr>
+          <tr>
+            <th>Vechile Reg No.</th>
+            <td>KA-MG-0143</td>
+          </tr>
+          <tr>
+            <th>Status</th>
+            <td>
+              <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+              </label>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="w3-bar">
+  <div class="w3-bar-item w3-center">
+    <button style="margin-right: 20px;" data-toggle="modal" href="#routeModal" routerLink="/RouteMap" class="btn btn-primary btn-md">Route</button>
+  </div>
+</div>
+
+<div *ngIf="deliveryBoyLogs!=undefined">
+<div class="w3-container w3-padding-16">
+  <h5 class="w3-black w3-padding">Delivery Log:</h5>
+  <div class="w3-card-4 w3-padding " style="margin-top: -10px" >
+    <div class="w3-container w3-padding w3-border" style="margin: 10px" *ngFor="let log of deliveryBoyLogs.logs; let i = index">
+      <!-- Single Assignment Log -->
+      <div class="row" *ngFor="let restaurant of log.restaurants; let j = index">
+        <div class="col-md-3">
+            <label>Restaurant Name</label>
+            <br />
+          {{restaurant.restaurantName}}
+          <br />
+          <label>Pick Up Location</label>
+          <iframe
+            [src]="restaurant.location"
+            width="100%" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
+            
+        </div>
+        <div class="col-md-3">
+          <label>Order Details</label>
+          <table class="table">
+            <tr>
+              <th>Quantity</th>
+              <td>{{restaurant.foodAvailability}}</td>
+            </tr>
+            <tr>
+              <th>Veg</th>
+              <td>{{restaurant.foodAvailability/2}}</td>
+            </tr>
+            <tr>
+              <th>Non-Veg</th>
+              <td>{{restaurant.foodAvailability/2}}</td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-md-3 w3-padding">
+          <div class="row">
+            <div class="col-md-12">
+              <button class="w3-btn w3-blue w3-small w3-round" (click)="onPicked(restaurant.username)">Picked</button>
+              &nbsp;
+              <button class="w3-btn w3-teal w3-small w3-round">Rejected</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Of Assignment Log -->
+  
+      <!-- Single Assignment Log -->
+      <div class="row" *ngFor="let charity of log.charities">
+        <!-- <div class="col-md-3"> -->
+          <!-- <label>Pick Up Address</label>
+          <br />
+          #11/1A 2nd A main 2nd Cross Kodichikkanahalli 4th stage, BTM 2nd Stage, Bengaluru, Karnataka 560076
+          <br />
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15556.723977937096!2d77.6145751!3d12.8960805!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x2647c13c1c5377de!2sDeccan+Expressions!5e0!3m2!1sen!2sin!4v1561914237147!5m2!1sen!2sin"
+            width="100%" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div> -->
+        <div class="col-md-3">
+          <label>Charity Name</label>
+          <br />
+          {{charity.charityName}}
+          <br />
+          <label>Delivery Location</label>
+          <iframe
+            [src]="charity.location"
+            width="100%" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+        <div class="col-md-3">
+          <label>Order Details</label>
+          <table class="table">
+            <tr>
+              <th>Quantity</th>
+              <td>{{charity.foodReceived}}</td>
+            </tr>
+            <tr>
+              <th>Veg</th>
+              <td>{{charity.foodReceived}}</td>
+            </tr>
+            <tr>
+              <th>Non-Veg</th>
+              <td>{{charity.foodReceived}}</td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-md-3 w3-padding">
+          <div class="row">
+            <div class="col-md-12">
+              <button class="w3-btn w3-teal w3-small w3-round" (click)="onDelivered(charity.username)">Delivered</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Of Assignment Log -->
+  </div>
+</div>
+</div>

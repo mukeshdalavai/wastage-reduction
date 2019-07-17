@@ -1,0 +1,17 @@
+<div class="p-4">
+		<label>Username</label>
+		<input type="text" name="" class="form-control" #usernameR placeholder="Enter Your Name"><br>
+
+		
+		<label>Email</label>
+		<input type="email" name="" class="form-control" #emailR placeholder="Enter Email"><br>
+		
+		<label>Password</label>
+		<input type="Password" name="" class="form-control" #passwordR placeholder="Enter Password"><br>
+		
+		<label>Confirm Password</label>
+		<input type="Password" name="" class="form-control" #confpaswordR placeholder="Confirm Password"><br>
+		<div class="text-center">
+				<button class="btn btn-dark" (click)="sendToOuter(usernameR.value, passwordR.value, emailR.value)">Sign-in</button>    
+		</div>
+	</div>

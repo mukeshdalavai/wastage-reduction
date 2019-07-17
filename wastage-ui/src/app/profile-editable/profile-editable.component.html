@@ -1,0 +1,522 @@
+<div class="container">
+  <h1>Profile</h1>
+  <hr>
+ 
+<div class="row">
+    
+    <!-- left column -->
+    <div class="col-md-3">
+      <div *ngIf="editable=='false'" class="text-center">
+          <img contenteditable="false" id="profile" src="//placehold.it/250" alt="your image" width="250px" height="250px" />
+        <div class="form-control">
+            <input type="file"
+            onchange="document.getElementById('profile').src = window.URL.createObjectURL(this.files[0])">
+          <!-- <button (click)="onUpload()">Upload</button> -->
+        </div>
+      </div>
+      <div *ngIf="editable=='true'" class="text-center">
+          <img data-type="editable" id="profile" src="//placehold.it/250" alt="your image" width="250px" height="250px" />
+        <div class="form-control">
+          <input type="file"
+              onchange="document.getElementById('profile').src = window.URL.createObjectURL(this.files[0])">
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+
+    <div *ngIf="role=='restaurant'">
+    <!-- edit form column -->
+    <div *ngIf="editable=='false'" class="col-md-9 personal-info">
+      <div class="alert alert-info alert-dismissable">
+        <a class="panel-close close" data-dismiss="alert">×</a> 
+        <i class="fa fa-check-circle"></i>
+        This profile is <strong>100%</strong> complete.
+      </div>
+   
+      <form class="form-horizontal">
+              
+      
+        <div class="form-control">
+           
+            <!-- <div id="myProgress" >
+                <div id="myBar" class="progress-bar" role="progressbar" >
+                  <div aria-valuenow="19"></div>
+                </div> -->
+                <div class="w3-bar">
+                  <div class="w3-bar-item w3-right">
+                    <img name="pencil" class="pencil"   (click)="edit()" src="../../assets/img/pen.png" height="30px" />
+                  </div>
+                  </div>
+        <div class="form-group">
+           
+              
+          <label class="col-lg-3 control-label">Username:</label>
+          <div class="col-lg-8">
+              <p class="p-2" contenteditable="false" id="textarea">{{restaurant.username}}</p>
+          </div>
+        <!-- <div class="form-group">        
+          <label class="col-lg-3 control-label">Password:</label>
+          <div class="col-lg-8">
+              <p class="p-2" contenteditable="false" id="textarea">{{restaurant.password}}</p>
+            </div>
+        </div> -->
+        <div class="form-group">
+          <label class="col-lg-3 control-label">E-Mail:</label>
+          <div class="col-lg-8">
+              <p class="p-2" contenteditable="false" id="textarea">{{restaurant.email}}</p>
+            </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Restaurant Name:</label>
+          <div class="col-lg-8">
+              <p class="p-2" contenteditable="false" id="textarea">{{restaurant.restaurantName}}</p>
+            </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Mobile:</label>
+          <div class="col-lg-8">
+              <p class="p-2" contenteditable="false" id="textarea">{{restaurant.mobile}}</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label">Address:</label>
+          <div class="col-md-8">
+              <p class="p-2" contenteditable="false" id="textarea">{{restaurant.address}}</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label">Location:</label>
+          <div class="col-md-8">
+              <p class="p-2" contenteditable="false" id="textarea">{{restaurant.location}}</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label">Certificate No:</label>
+          <div class="col-md-8" >
+            <p class="p-2" contenteditable="false" id="textarea">{{restaurant.certificateNo}}</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label">Certificate:</label>
+          <div class="col-md-8" >
+            <p class="p-2" contenteditable="false" id="textarea">{{restaurant.certificateName}}</p>
+          </div>
+        </div>
+        </div>
+        </div>           
+      </form>
+    </div>
+      
+    <div *ngIf="editable=='true'" class="col-md-9 personal-info">
+      <div class="alert alert-info alert-dismissable">
+        <a class="panel-close close" data-dismiss="alert">×</a> 
+        <i class="fa fa-check-circle"></i>
+        This profile is <strong>100%</strong> complete.
+      </div>
+      
+      <form #restaurantForm="ngForm" class="form-horizontal" >
+        <div class="form-control">
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Username:</label>
+          <div class="col-lg-8">
+              <input [(ngModel)]="restaurant.username"  type="text" name="username" class="p-2" >
+            </div>
+        </div>
+        <!-- <div class="form-group">
+          <label class="col-lg-3 control-label">Password:</label>
+          <div class="col-lg-8">
+              <p ngModel name="password" class="p-2" contenteditable="true" id="textarea">{{restaurant.password}}</p>
+            </div>
+        </div> -->
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Email:</label>
+          <div class="col-lg-8">
+              <input [(ngModel)]="restaurant.email" type="email" name="email" class="p-2" >
+            </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Restaurant Name:</label>
+          <div class="col-lg-8">
+              <input [(ngModel)]="restaurant.restaurantName" type="text" name="restaurantName" class="p-2" >
+            </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Mobile No:</label>
+          <div class="col-lg-8">
+              <input [(ngModel)]="restaurant.mobile" type="number" name="mobile" class="p-2" >
+            </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Address:</label>
+          <div class="col-lg-8">
+              <input [(ngModel)]="restaurant.address" type="text" name="address" class="p-2" >
+            </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Location:</label>
+          <div class="col-lg-8">
+              <input [(ngModel)]="restaurant.location" type="text" name="location" class="p-2" >
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label">Certificate No:</label>
+          <div class="col-md-8">
+              <input [(ngModel)]="restaurant.certificateNo" type="text" name="certificateNo" class="p-2" >
+          </div>
+        </div>
+       
+        <div class="form-group">
+          <label class="col-md-3 control-label">Certificate:</label>
+          <div class="col-md-8" >
+            <input [(ngModel)]="restaurant.certificateName" type="file" name="certificateName" class="p-2" >
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label"></label>
+          <div class="col-md-8">
+            <input type="submit" class="btn btn-primary" value="Save Changes" (click)="updateRestaurantProfile(restaurantForm.value)">
+            <span>  </span>
+            <input type="reset" class="btn btn-default" value="Cancel" (click)="edit()">
+          </div>
+          </div>
+        </div>
+      </form>
+   </div> 
+</div>
+
+
+
+
+<div *ngIf="role=='charity'">
+  <!-- edit form column -->
+  <div *ngIf="editable=='false'" class="col-md-9 personal-info">
+    <div class="alert alert-info alert-dismissable">
+      <a class="panel-close close" data-dismiss="alert">×</a> 
+      <i class="fa fa-check-circle"></i>
+      This profile is <strong>100%</strong> complete.
+    </div>
+ 
+    <form class="form-horizontal">
+            
+    
+      <div class="form-control">
+         
+          <!-- <div id="myProgress" >
+              <div id="myBar" class="progress-bar" role="progressbar" >
+                <div aria-valuenow="19"></div>
+              </div> -->
+              <div class="w3-bar">
+                <div class="w3-bar-item w3-right">
+                  <img name="pencil" class="pencil"   (click)="edit()" src="../../assets/img/pen.png" height="30px" />
+                </div>
+                </div>
+      <div class="form-group">
+         
+            
+        <label class="col-lg-3 control-label">Username:</label>
+        <div class="col-lg-8">
+            <p class="p-2" contenteditable="false" id="textarea">{{charity.username}}</p>
+        </div>
+      <!-- <div class="form-group">        
+        <label class="col-lg-3 control-label">Password:</label>
+        <div class="col-lg-8">
+            <p class="p-2" contenteditable="false" id="textarea">{{charity.password}}</p>
+          </div>
+      </div> -->
+      <div class="form-group">
+        <label class="col-lg-3 control-label">E-Mail:</label>
+        <div class="col-lg-8">
+            <p class="p-2" contenteditable="false" id="textarea">{{charity.email}}</p>
+          </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-3 control-label">Charity Name:</label>
+        <div class="col-lg-8">
+            <p class="p-2" contenteditable="false" id="textarea">{{charity.charityName}}</p>
+          </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-3 control-label">Mobile:</label>
+        <div class="col-lg-8">
+            <p class="p-2" contenteditable="false" id="textarea">{{charity.mobile}}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">Address:</label>
+        <div class="col-md-8">
+            <p class="p-2" contenteditable="false" id="textarea">{{charity.address}}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">Location:</label>
+        <div class="col-md-8">
+            <p class="p-2" contenteditable="false" id="textarea">{{charity.location}}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">Food Requirement: (No of People)</label>
+        <div class="col-md-8">
+            <p class="p-2" contenteditable="false" id="textarea">{{charity.foodRequirement}}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">Certificate No:</label>
+        <div class="col-md-8" >
+          <p class="p-2" contenteditable="false" id="textarea">{{charity.certificateNo}}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">Certificate:</label>
+        <div class="col-md-8" >
+          <p class="p-2" contenteditable="false" id="textarea">{{charity.certificateName}}</p>
+        </div>
+      </div>
+      </div>
+      </div>           
+    </form>
+  </div>
+    
+  <div *ngIf="editable=='true'" class="col-md-9 personal-info">
+    <div class="alert alert-info alert-dismissable">
+      <a class="panel-close close" data-dismiss="alert">×</a> 
+      <i class="fa fa-check-circle"></i>
+      This profile is <strong>100%</strong> complete.
+    </div>
+    
+    <form #charityForm="ngForm" class="form-horizontal" >
+      <div class="form-control">
+      <div class="form-group">
+        <label class="col-lg-3 control-label">Username:</label>
+        <div class="col-lg-8">
+            <input [(ngModel)]="charity.username" type="text" name="username" class="p-2" >
+          </div>
+      </div>
+      <!-- <div class="form-group">
+        <label class="col-lg-3 control-label">Password:</label>
+        <div class="col-lg-8">
+            <p ngModel name="password" class="p-2" contenteditable="true" id="textarea">{{charity.password}}</p>
+          </div>
+      </div> -->
+      <div class="form-group">
+        <label class="col-lg-3 control-label">Email:</label>
+        <div class="col-lg-8">
+            <input [(ngModel)]="charity.email" type="text" name="email" class="p-2">
+          </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-3 control-label">Charity Name:</label>
+        <div class="col-lg-8">
+            <input [(ngModel)]="charity.charityName" type="text" name="charityName" class="p-2">
+          </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-3 control-label">Mobile No:</label>
+        <div class="col-lg-8">
+            <input [(ngModel)]="charity.mobile" type="number" name="mobile" class="p-2">
+          </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-3 control-label">Address:</label>
+        <div class="col-lg-8">
+            <input [(ngModel)]="charity.address" type="text" name="address" class="p-2">
+          </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-3 control-label">Location:</label>
+        <div class="col-lg-8">
+            <input [(ngModel)]="charity.location" type="text" name="location" class="p-2">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-3 control-label">Food Requirement: (No of People)</label>
+        <div class="col-lg-8">
+            <input [(ngModel)]="charity.foodRequirement" type="number" name="foodRequirement" class="p-2">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">Certificate No:</label>
+        <div class="col-md-8">
+            <input [(ngModel)]="charity.certificateNo" type="text" name="certificateNo" class="p-2">
+        </div>
+      </div>
+     
+      <div class="form-group">
+        <label class="col-md-3 control-label">Certificate:</label>
+        <div class="col-md-8" >
+            <input [(ngModel)]="charity.certificateName" type="file" name="certificateName" class="p-2">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label"></label>
+        <div class="col-md-8">
+          <input type="submit" class="btn btn-primary" value="Save Changes" (click)="updateCharityProfile(charityForm.value)">
+          <span>  </span>
+          <input type="reset" class="btn btn-default" value="Cancel" (click)="edit()">
+        </div>
+        </div>
+      </div>
+    </form>
+ </div> 
+</div>
+
+
+
+<div *ngIf="role=='deliveryBoy'">
+    {{deliveryBoy.username}}
+  <!-- edit form column -->
+  <div *ngIf="editable=='false'" class="col-md-9 personal-info">
+    <div class="alert alert-info alert-dismissable">
+      <a class="panel-close close" data-dismiss="alert">×</a> 
+      <i class="fa fa-check-circle"></i>
+      This profile is <strong>100%</strong> complete.
+    </div>
+ 
+    <form class="form-horizontal">
+            
+    
+      <div class="form-control">
+         
+          <!-- <div id="myProgress" >
+              <div id="myBar" class="progress-bar" role="progressbar" >
+                <div aria-valuenow="19"></div>
+              </div> -->
+              <div class="w3-bar">
+                <div class="w3-bar-item w3-right">
+                  <img name="pencil" class="pencil"   (click)="edit()" src="../../assets/img/pen.png" height="30px" />
+                </div>
+                </div>
+      <div class="form-group">
+         
+            
+        <label class="col-lg-3 control-label">Username:</label>
+        <div class="col-lg-8">
+            <p class="p-2" contenteditable="false" id="textarea">{{deliveryBoy.username}}</p>
+        </div>
+      <!-- <div class="form-group">        
+        <label class="col-lg-3 control-label">Password:</label>
+        <div class="col-lg-8">
+            <p class="p-2" contenteditable="false" id="textarea">{{deliveryBoy.password}}</p>
+          </div>
+      </div> -->
+      <div class="form-group">
+        <label class="col-lg-3 control-label">E-Mail:</label>
+        <div class="col-lg-8">
+            <p class="p-2" contenteditable="false" id="textarea">{{deliveryBoy.email}}</p>
+          </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-3 control-label">DeliveryBoy Name:</label>
+        <div class="col-lg-8">
+            <p class="p-2" contenteditable="false" id="textarea">{{deliveryBoy.deliveryBoyName}}</p>
+          </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-3 control-label">Mobile:</label>
+        <div class="col-lg-8">
+            <p class="p-2" contenteditable="false" id="textarea">{{deliveryBoy.mobile}}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">Address:</label>
+        <div class="col-md-8">
+            <p class="p-2" contenteditable="false" id="textarea">{{deliveryBoy.address}}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">License No:</label>
+        <div class="col-md-8" >
+          <p class="p-2" contenteditable="false" id="textarea">{{deliveryBoy.licenseNo}}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">License:</label>
+        <div class="col-md-8" >
+          <p class="p-2" contenteditable="false" id="textarea">{{deliveryBoy.licenseName}}</p>
+        </div>
+      </div>
+      </div>
+      </div>           
+    </form>
+  </div>
+    
+  <div *ngIf="editable=='true'" class="col-md-9 personal-info">
+    <div class="alert alert-info alert-dismissable">
+      <a class="panel-close close" data-dismiss="alert">×</a> 
+      <i class="fa fa-check-circle"></i>
+      This profile is <strong>100%</strong> complete.
+    </div>
+    
+    <form #deliveryBoyForm="ngForm" class="form-horizontal" >
+      <div class="form-control">
+      <div class="form-group">
+        <label class="col-lg-3 control-label">Username:</label>
+        <div class="col-lg-8">
+            <input [(ngModel)]="deliveryBoy.username" type="text" name="username" class="p-2">
+          </div>
+      </div>
+      <!-- <div class="form-group">
+        <label class="col-lg-3 control-label">Password:</label>
+        <div class="col-lg-8">
+            <p ngModel name="password" class="p-2" contenteditable="true" id="textarea">{{deliveryBoy.password}}</p>
+          </div>
+      </div> -->
+      <div class="form-group">
+        <label class="col-lg-3 control-label">Email:</label>
+        <div class="col-lg-8">
+            <input [(ngModel)]="deliveryBoy.email" type="email" name="email" class="p-2">
+          </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-3 control-label">DeliveryBoy Name:</label>
+        <div class="col-lg-8">
+            <input [(ngModel)]="deliveryBoy.deliveryBoyName" type="text" name="deliveryBoyName" class="p-2">
+          </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-3 control-label">Mobile No:</label>
+        <div class="col-lg-8">
+            <input [(ngModel)]="deliveryBoy.mobile" type="number" name="mobile" class="p-2" >
+          </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-3 control-label">Address:</label>
+        <div class="col-lg-8">
+            <input [(ngModel)]="deliveryBoy.address" type="text" name="address" class="p-2">
+          </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">License No:</label>
+        <div class="col-md-8">
+            <input [(ngModel)]="deliveryBoy.licenseNo" type="text" name="licenseNo" class="p-2" >
+        </div>
+      </div>
+     
+      <div class="form-group">
+        <label class="col-md-3 control-label">License:</label>
+        <div class="col-md-8" >
+          <input [(ngModel)]="deliveryBoy.licenseName" type="file" name="licenseName" class="p-2" >
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label"></label>
+        <div class="col-md-8">
+          <input type="submit" class="btn btn-primary" value="Save Changes" (click)="updateDeliveryBoyProfile(deliveryBoyForm.value)">
+          <span>  </span>
+          <input type="reset" class="btn btn-default" value="Cancel" (click)="edit()">
+        </div>
+        </div>
+      </div>
+    </form>
+ </div> 
+</div>
+
+
+
+
+</div>
+</div>
+<hr>
