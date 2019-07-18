@@ -140,10 +140,13 @@ services:
         - 3306:3306
       environment:
         - MYSQL_ROOT_PASSWORD=Root@123
-        - MYSQL_DATABASE=user
       container_name: mysql
       network_mode: host
       hostname: localhost
+      entrypoint:
+      sh -c "
+      echo 'CREATE DATABASE IF NOT EXISTS authorizationService; CREATE DATABASE IF NOT EXISTS registrationService;' > /docker-entrypoint-initdb.d/init.sql;
+      /usr/local/bin/docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
 
   mongo:
     image: mongo
