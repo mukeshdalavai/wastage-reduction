@@ -119,10 +119,10 @@ services:
   mysql:
     image: mysql:5.7
     restart: always
-    network_mode: "host"
+    network_mode: host
     environment:
-      MYSQL_USER: root
-      MYSQL_ROOT_PASSWORD: "Destiny1!"
+      - MYSQL_USER=root
+      - MYSQL_ROOT_PASSWORD=Destiny1!
     hostname: localhost
     entrypoint:
       sh -c "
@@ -133,6 +133,7 @@ services:
       - 3306:3306
     volumes:
       - ../data/mysql:/var/lib/mysql
+
 
   mongo:
     image: mongo
