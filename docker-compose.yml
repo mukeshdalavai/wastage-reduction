@@ -160,14 +160,17 @@ services:
       RABBITMQ_DEFAULT_VHOST: /
 
   neo4j:
-    image: neo4j:3.5
-    restart: always
-    hostname: localhost
-    network_mode: "host"
+    image: neo4j:3.0
     ports:
       - 7474:7474
       - 7687:7687
+    expose:
+      - 7474
+    container_name: neo4j
+    network_mode: host
+    hostname: localhost
     volumes:
       - ../data/neo4j/data:/data
-      - ../data/neo4j/logs:/logs
-
+    environment:
+      - NEO4J_AUTH=neo4j/root123
+    restart: always

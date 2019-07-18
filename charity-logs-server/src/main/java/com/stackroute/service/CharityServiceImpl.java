@@ -22,8 +22,6 @@ public class CharityServiceImpl implements CharityService {
     @Autowired
     CharityLiveStatusRepository charityLiveStatusRepository;
 
-    @Autowired
-    SequenceRepository sequenceRepository;
 
     @Autowired
     SendRating sendRating;
@@ -36,10 +34,8 @@ public class CharityServiceImpl implements CharityService {
     public Charity saveCharityLogs(String username) throws Exception {
         Charity charity = new Charity();
         List<Logs> logsList = new ArrayList<>();
-        SequenceGenerator sequenceGenerator = new SequenceGenerator("",0);
         try {
             charity = charityRepository.findById(username).get();
-            sequenceGenerator = sequenceRepository.findById(username).get();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -49,10 +45,6 @@ public class CharityServiceImpl implements CharityService {
         }
          CharityLiveStatus charityLiveStatus = charityLiveStatusRepository.findById(username).get();
         Logs logs = charityLiveStatus.getLogs();
-        logs.setId(sequenceGenerator.getCount());
-        sequenceGenerator.setUsername(username);
-        sequenceGenerator.setCount(sequenceGenerator.getCount()+1);
-        sequenceRepository.save(sequenceGenerator);
         logsList.add(logs);
         charity.setUsername(username);
         charity.setLogs(logsList);

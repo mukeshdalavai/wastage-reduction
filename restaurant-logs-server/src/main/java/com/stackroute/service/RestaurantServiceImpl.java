@@ -20,8 +20,6 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Autowired
     RestaurantLiveStatusRepository restaurantLiveStatusRepository;
 
-    @Autowired
-    SequenceRepository sequenceRepository;
 
     @Autowired
     public RestaurantServiceImpl(RestaurantRepository restaurantRepository) {
@@ -32,11 +30,10 @@ public class RestaurantServiceImpl implements RestaurantService {
     public Restaurant saveRestaurantLog(String username) {
         Restaurant restaurant;
         List<Logs> logsList;
-        SequenceGenerator sequenceGenerator = new SequenceGenerator("",0);
+
         try{
             restaurant = restaurantRepository.findById(username).get();
             logsList = restaurant.getLogs();
-            sequenceGenerator = sequenceRepository.findById(username).get();
         }
         catch (Exception e){
             System.out.println(e.getMessage());
@@ -44,10 +41,6 @@ public class RestaurantServiceImpl implements RestaurantService {
         }
             RestaurantLiveStatus restaurantLiveStatus = restaurantLiveStatusRepository.findById(username).get();
             Logs logs = restaurantLiveStatus.getLogs();
-            logs.setId(sequenceGenerator.getCount());
-            sequenceGenerator.setUsername(username);
-            sequenceGenerator.setCount(sequenceGenerator.getCount()+1);
-            sequenceRepository.save(sequenceGenerator);
             logsList.add(logs);
             restaurant = new Restaurant(username,logsList);
             return restaurantRepository.save(restaurant);
