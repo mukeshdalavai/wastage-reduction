@@ -132,18 +132,18 @@ services:
 #      - ../data/mysql:/var/lib/mysql
 
   mysql:
-      image: mysql:5.7
-      ports:
-        - 3306:3306
-      environment:
-        - MYSQL_ROOT_PASSWORD=Destiny1!
-      container_name: mysql
-      network_mode: host
-      hostname: localhost
-      entrypoint:
-        sh -c "echo 'CREATE DATABASE IF NOT EXISTS authorizationService; CREATE DATABASE IF NOT EXISTS registrationService;' > /docker-entrypoint-initdb.d/init.sql;/usr/local/bin/docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
-      volumes:
-        - ../data/mysql:/var/lib/mysql
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=Destiny1!
+    container_name: mysql
+    network_mode: host
+    hostname: localhost
+    entrypoint:
+      sh -c "echo 'CREATE DATABASE IF NOT EXISTS authorizationService; CREATE DATABASE IF NOT EXISTS registrationService;' > /docker-entrypoint-initdb.d/init.sql;/usr/local/bin/docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
+    volumes:
+      - ../data/mysql:/var/lib/mysql
 
 
   mongo:
