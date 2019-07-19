@@ -1,14 +1,14 @@
 version: '2'
 
 services:
-#  wastage-ui:
-#    image: wastage-ui:1.0
-#    build: wastage-ui/
-#    restart: always
-#    network_mode: "host"
-#    hostname: localhost
-#    ports:
-#      - 4200:4200
+  wastage-ui:
+    image: wastage-ui:1.0
+    build: wastage-ui/
+    restart: always
+    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 4200:4200
 
   eureka-server:
     image: eureka-server:1.0

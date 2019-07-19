@@ -11,11 +11,11 @@ export class SignupService {
 
   signupRestaurant(restaurant):Observable<any>{ 
     console.log(restaurant)
-    return this.http.post<any>('http://localhost:8000/registration-service/api/v1/restaurant-profile',restaurant);
+    return this.http.post<any>('http://13.234.235.193:8000/registration-service/api/v1/restaurant-profile',restaurant);
   }  
 
   signupCharity(charity):Observable<any>{ 
     console.log(charity)
-    return this.http.post<any>('http://localhost:8000/registration-service/api/v1/charity-profile',charity);
+    return this.http.post<any>('http://13.234.235.193:8000/registration-service/api/v1/charity-profile',charity);
   }  
 }
